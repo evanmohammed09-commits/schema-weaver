@@ -25,4 +25,23 @@ const TooltipContent = React.forwardRef<
 ));
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+type DynamicTooltipProps = {
+  trigger: React.ReactNode;
+  text: string;
+  className?: string;
+};
+
+const DynamicTooltip = ({ trigger, text, className }: DynamicTooltipProps) => {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>{trigger}</TooltipTrigger>
+        <TooltipContent className={className}>
+          <p>{text}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider, DynamicTooltip };
